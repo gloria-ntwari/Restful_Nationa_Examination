@@ -1,88 +1,114 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Lock, Mail, TrendingUp, User } from 'lucide-react'
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Lock, Mail, User, Shield } from "lucide-react";
+import fireExtinguisherBg from "../assets/imager1.jpg";
 
-function FormInput({ icon: Icon, type = 'text', placeholder, value, onChange }) {
+function FormInput({
+  icon: Icon,
+  type = "text",
+  placeholder,
+  value,
+  onChange,
+}) {
   return (
-    <div className="relative">
-      <Icon className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
+    <div className="relative mb-6">
+      <Icon className="pointer-events-none absolute left-0 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
       <input
         type={type}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className="w-full rounded-xl border border-border bg-input-bg py-3.5 pr-4 pl-11 text-sm text-text-primary placeholder:text-text-muted focus:border-accent-teal focus:bg-card focus:outline-none focus:ring-2 focus:ring-accent-teal/20"
+        className="auth-input w-full border-0 border-b border-gray-300 bg-transparent py-3 pl-8 text-sm text-gray-700 placeholder:text-gray-500 focus:border-[#D9534F] focus:outline-none focus:ring-0"
       />
     </div>
-  )
+  );
 }
 
 export default function AuthPage() {
-  const navigate = useNavigate()
-  const [mode, setMode] = useState('signup')
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const navigate = useNavigate();
+  const [mode, setMode] = useState("login");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    navigate('/dashboard')
-  }
+    e.preventDefault();
+    navigate("/dashboard");
+  };
 
-  const isSignUp = mode === 'signup'
+  const isLogin = mode === "login";
 
   return (
-    <div className="flex min-h-svh">
-      {/* Left panel — sidebar color */}
-      <div className="relative hidden w-[40%] flex-col justify-between overflow-hidden bg-sidebar p-10 text-white lg:flex">
-        <div className="pointer-events-none absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 h-24 w-24 rotate-45 rounded-lg border-2 border-white" />
-          <div className="absolute top-40 right-16 h-16 w-16 rotate-12 rounded-lg border-2 border-white" />
-          <div className="absolute bottom-32 left-1/3 h-20 w-20 -rotate-12 rounded-lg border-2 border-white" />
-        </div>
+    <div
+      className="flex min-h-svh bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${fireExtinguisherBg})` }}
+    >
+      {/* Left side - Branding */}
+      <div className="relative flex-1">
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/40" />
 
-        <div className="relative flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10">
-            <TrendingUp className="h-4 w-4 text-brand" />
+        {/* Branding content */}
+        <div className="relative z-10 flex flex-col justify-center h-full p-12">
+          <div className="text-white max-w-lg">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20 backdrop-blur-sm">
+                <Shield className="h-5 w-5 text-white" />
+              </div>
+              <span className="text-lg font-semibold">Fire Safety Manager</span>
+            </div>
+
+            <h1 className="text-4xl font-bold mb-2">Fire Extinguisher</h1>
+            <h2 className="text-4xl font-bold mb-6">Management System</h2>
+            <p className="text-lg text-white/90 leading-relaxed">
+              Comprehensive fire safety equipment tracking and maintenance
+              management for your organization
+            </p>
           </div>
-          <span className="text-lg font-semibold">FiinFlow</span>
         </div>
-
-        <div className="relative mx-auto max-w-sm text-center">
-          <h1 className="text-4xl font-bold">Welcome Back!</h1>
-          <p className="mt-4 text-sm leading-relaxed text-white/80">
-            To keep connected with us please login with your personal info
-          </p>
-        </div>
-
-        <div />
       </div>
 
-      {/* Right panel — page bg with white form card */}
-      <div className="flex flex-1 items-center justify-center bg-page-bg p-6 sm:p-10">
-        <div className="w-full max-w-md rounded-2xl border border-border bg-card p-8 shadow-sm sm:p-10">
-          <h2 className="text-center text-3xl font-bold text-[#243447]">
-            {isSignUp ? 'Create Account' : 'Sign In'}
-          </h2>
+      {/* Right side - Form area with semi-transparent background */}
+      <div className="relative w-[760px] min-h-svh">
+        {/* Semi-transparent overlay to make background image subtle */}
+        <div className="absolute inset-0 bg-white/75" />
 
-          <div className="mt-6 flex justify-center gap-3">
-            {['f', 'G+', 'in'].map((label) => (
-              <button
-                key={label}
-                type="button"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-xs font-bold text-text-primary transition-colors hover:bg-page-bg"
-              >
-                {label}
-              </button>
-            ))}
+        {/* Form content */}
+        <div className="relative z-10 flex flex-col justify-center h-full p-12">
+          {/* Welcome heading */}
+          <div className="text-center mb-4">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">WELCOME!</h1>
           </div>
 
-          <p className="mt-4 text-center text-xs text-text-muted">
-            or use your email for {isSignUp ? 'registration' : 'login'}:
-          </p>
+          {/* Login/Sign Up Button Tabs */}
+          <div className="flex gap-4 mb-8">
+            <button
+              type="button"
+              onClick={() => setMode("login")}
+              className={`flex-1 py-3 px-6 text-sm font-semibold rounded-lg transition-colors ${
+                isLogin
+                  ? "bg-white/90 text-gray-800 shadow-sm"
+                  : " text-gray-600 bg-white/50"
+              }`}
+            >
+              Log In
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode("signup")}
+              className={`flex-1 py-3 px-6 text-sm font-semibold rounded-lg transition-colors ${
+                !isLogin
+                  ? "bg-white/90 text-gray-800 shadow-sm"
+                  : " text-gray-600 bg-white/50"
+              }`}
+            >
+              Sign Up
+            </button>
+          </div>
 
-          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-            {isSignUp && (
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-2">
+            {!isLogin && (
               <FormInput
                 icon={User}
                 placeholder="Name"
@@ -107,30 +133,35 @@ export default function AuthPage() {
 
             <button
               type="submit"
-              className="mt-2 w-full rounded-full bg-sidebar py-3.5 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-sidebar-dark"
+              className="w-full rounded-full bg-[#D9534F] py-4 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-[#c9302c] mt-8"
             >
-              {isSignUp ? 'SIGN UP' : 'SIGN IN'}
+              {isLogin ? "SIGN IN" : "SIGN UP"}
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-text-secondary">
-            {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
-            <button
-              type="button"
-              onClick={() => setMode(isSignUp ? 'signin' : 'signup')}
-              className="font-medium text-sidebar hover:underline"
-            >
-              {isSignUp ? 'Sign in' : 'Sign up'}
-            </button>
-          </p>
-
-          <p className="mt-4 text-center lg:hidden">
-            <Link to="/dashboard" className="text-sm text-accent-teal hover:underline">
-              Continue to dashboard →
-            </Link>
-          </p>
+          {/* Footer links */}
+          <div className="mt-8 text-center space-y-2">
+            {isLogin && (
+              <Link
+                to="#"
+                className="block text-sm text-[#D9534F] hover:underline"
+              >
+                Forgot your password?
+              </Link>
+            )}
+            <p className="text-sm text-gray-600">
+              {isLogin ? "Don't have an account? " : "Already a member? "}
+              <button
+                type="button"
+                onClick={() => setMode(isLogin ? "signup" : "login")}
+                className="text-gray-800 hover:underline font-medium"
+              >
+                {isLogin ? "Sign Up" : "Log In"}
+              </button>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

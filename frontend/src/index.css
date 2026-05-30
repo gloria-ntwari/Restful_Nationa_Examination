@@ -1,19 +1,20 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-  --color-sidebar: #243447;
-  --color-page-bg: #f5f7fb;
+  --color-sidebar: #d9534f;
+  --color-sidebar-dark: #c9302c;
+  --color-page-bg: #fafafb;
   --color-card: #ffffff;
-  --color-brand: #16a34a;
-  --color-brand-dark: #15803d;
-  --color-accent-teal: #0d9488;
-  --color-accent-teal-dark: #0f766e;
+  --color-brand: #d9534f;
+  --color-brand-dark: #c9302c;
+  --color-accent-teal: #d9534f;
+  --color-accent-teal-dark: #c9302c;
   --color-text-primary: #111827;
   --color-text-secondary: #6b7280;
   --color-text-muted: #9ca3af;
   --color-border: #e5e7eb;
   --color-input-bg: #f3f4f6;
-  --font-sans: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+  --font-sans: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
 }
 
 * {
@@ -29,4 +30,16 @@ body {
 
 #root {
   min-height: 100svh;
+}
+
+/* Override browser autofill background on auth inputs */
+.auth-input:-webkit-autofill,
+.auth-input:-webkit-autofill:hover,
+.auth-input:-webkit-autofill:focus,
+.auth-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  box-shadow: 0 0 0 1000px transparent inset;
+  -webkit-text-fill-color: #374151;
+  caret-color: #374151;
+  transition: background-color 5000s ease-in-out 0s;
 }
